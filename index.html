@@ -1,614 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Green Network - Protect Earth</title>
-  <meta name="description" id="metaDescription" content="Green Network — a global community dedicated to environmental protection, reforestation, ocean conservation and renewable energy advocacy. Join us to make a real difference." />
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Green Network - Protect Earth" id="ogTitle"/>
-  <meta property="og:description" content="Join the global movement to create a sustainable world through conservation, education, and community action." id="ogDesc"/>
-  <meta property="og:type" content="website" />
-  <!-- OG image updated to Earth image -->
-  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Green Network - Protect Earth" />
-  <meta name="twitter:description" content="Join the global movement to create a sustainable world through conservation, education, and community action." />
-
-  <!-- Icons (Font Awesome) -->
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+  <title>老年痴呆症 / Dementia & Alzheimer’s</title>
   <style>
     :root{
-      --primary:#2e7d32;
-      --secondary:#4caf50;
-      --accent:#8bc34a;
-      --light:#e8f5e9;
-      --dark:#1b5e20;
-      --text:#333333;
-      --white:#ffffff;
-      --max-width:1200px;
-      --transition:0.28s ease;
-      --focus: 3px solid rgba(139,195,74,0.25);
-      --header-height:76px;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#2563eb;
+      --success:#059669;
+      --danger:#ef4444;
+      --radius:12px;
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color:var(--light);
-      color:var(--text);
-      line-height:1.6;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-    .container{width:90%;max-width:var(--max-width);margin:0 auto}
-
-    header{
-      background:linear-gradient(90deg,var(--primary),var(--secondary));
-      color:var(--white);
-      padding:0.6rem 0;
-      position:sticky;
-      top:0;
-      z-index:1200;
-      box-shadow:0 2px 10px rgba(0,0,0,0.08);
-      backdrop-filter: blur(6px);
-    }
-    .nav-container{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-    .logo{display:flex;align-items:center;gap:10px;font-size:1.35rem;font-weight:700}
-    .logo i{font-size:1.6rem}
-    nav{position:relative}
-    nav ul{display:flex;list-style:none;gap:1.2rem;align-items:center}
-    nav a{color:var(--white);text-decoration:none;font-weight:600;padding:0.35rem 0;position:relative;transition:var(--transition)}
-    nav a:hover, nav a:focus{color:var(--accent);outline:none}
-    nav a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:3px;background:var(--accent);transition:width var(--transition)}
-    nav a:hover::after, nav a:focus::after{width:100%}
-    .mobile-menu{display:none;background:transparent;border:0;color:var(--white);font-size:1.2rem;padding:6px;border-radius:8px;cursor:pointer}
-    .mobile-menu:focus{box-shadow:var(--focus);outline:none}
-
-    .lang-switch{display:flex;gap:6px;align-items:center}
-    .lang-btn{background:transparent;border:1px solid rgba(255,255,255,0.18);color:var(--white);padding:0.35rem 0.6rem;border-radius:6px;cursor:pointer;font-weight:600}
-    .lang-btn.active{background:rgba(255,255,255,0.12)}
-    .lang-btn:focus{box-shadow:var(--focus);outline:none}
-
-    .hero{min-height:76vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);position:relative;overflow:hidden}
-    .hero-lazy{background-size:cover;background-position:center;width:100%;height:100%;position:absolute;inset:0;z-index:0;filter:brightness(0.55) contrast(1.05);transition:opacity 600ms ease;opacity:0}
-    .hero-lazy.loaded{opacity:1}
-    .hero .hero-content{position:relative;z-index:2;max-width:880px;padding:3rem 1rem}
-    .hero h1{font-size:2.6rem;margin-bottom:0.8rem;text-shadow:2px 2px 6px rgba(0,0,0,0.45)}
-    .hero p{font-size:1.05rem;margin-bottom:1.2rem}
-    .btn{display:inline-block;background:var(--accent);color:var(--white);padding:0.7rem 1.6rem;border-radius:999px;font-weight:700;text-decoration:none;border:0;cursor:pointer;transition:var(--transition);box-shadow:0 6px 12px rgba(0,0,0,0.08)}
-    .btn:focus{outline:none;box-shadow:var(--focus)}
-    .btn:hover{transform:translateY(-3px);background:var(--dark)}
-
-    section{padding:4rem 0}
-    .section-title{text-align:center;margin-bottom:2rem}
-    .section-title h2{font-size:2rem;color:var(--primary);display:inline-block;position:relative;margin-bottom:8px}
-    .section-title h2::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:var(--accent);border-radius:2px}
-    .section-title p{max-width:720px;margin:0 auto;color:var(--text)}
-
-    .about-content{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
-    .about-img{border-radius:10px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,0.06)}
-    .about-img img{width:100%;height:auto;display:block;transition:transform 0.5s ease}
-    .about-img:hover img{transform:scale(1.03)}
-    .about-text h3{font-size:1.25rem;margin-bottom:1rem;color:var(--dark)}
-
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem}
-    .stat-item{background:var(--white);padding:1.2rem;border-radius:10px;text-align:center;box-shadow:0 6px 14px rgba(0,0,0,0.04);transition:transform var(--transition)}
-    .stat-item:hover{transform:translateY(-6px)}
-    .stat-item i{font-size:1.6rem;color:var(--primary);margin-bottom:0.6rem}
-    .stat-item h3{font-size:1.6rem;color:var(--dark);margin-bottom:0.2rem}
-
-    .initiatives-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-    .initiative-card{background:var(--light);border-radius:10px;overflow:hidden;box-shadow:0 6px 14px rgba(0,0,0,0.04);transition:transform var(--transition)}
-    .initiative-card:hover{transform:translateY(-6px)}
-    .initiative-img{height:200px;overflow:hidden}
-    .initiative-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease}
-    .initiative-card:hover .initiative-img img{transform:scale(1.05)}
-    .initiative-content{padding:1rem}
-
-    .cta{background:linear-gradient(90deg,var(--primary),var(--secondary));color:var(--white);padding:3.2rem 0;text-align:center}
-    .cta .btn{background:var(--white);color:var(--primary);padding:0.6rem 1.4rem}
-    .cta .btn:hover{background:var(--accent);color:var(--white)}
-
-    footer{background:var(--dark);color:var(--white);padding:2.2rem 0}
-    .footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.2rem}
-    .footer-column h3{font-size:1.05rem;margin-bottom:0.8rem;position:relative;padding-bottom:6px}
-    .footer-column h3::after{content:'';position:absolute;bottom:0;left:0;width:40px;height:2px;background:var(--accent)}
-    .footer-links{list-style:none}
-    .footer-links a{color:rgba(255,255,255,0.9);text-decoration:none;display:inline-block;margin-bottom:0.45rem}
-    .footer-links a:hover, .footer-links a:focus{color:var(--accent)}
-    .social-links{display:flex;gap:0.6rem}
-    .social-links a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.06);color:var(--white);text-decoration:none}
-    .social-links a:focus{outline:none;box-shadow:var(--focus)}
-
-    .stats-controls{display:flex;gap:0.6rem;align-items:center;justify-content:center;margin-top:0.75rem}
-    .toggle{display:inline-flex;align-items:center;gap:8px}
-
-    @media (max-width: 992px){
-      .about-content{grid-template-columns:1fr}
-      .initiatives-grid{grid-template-columns:repeat(2,1fr)}
-      .footer-content{grid-template-columns:repeat(2,1fr)}
-      .stats{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width: 768px){
-      nav ul{display:none;position:absolute;top:100%;left:0;width:100%;background:linear-gradient(90deg,var(--primary),var(--secondary));flex-direction:column;padding:1rem 0;box-shadow:0 8px 20px rgba(0,0,0,0.12)}
-      nav ul.active{display:flex}
-      nav ul li{padding:0.65rem 0;text-align:center}
-      .mobile-menu{display:inline-flex}
-      .initiatives-grid{grid-template-columns:1fr}
-      .footer-content{grid-template-columns:1fr}
-      .stats{grid-template-columns:1fr}
-      .hero h1{font-size:1.9rem}
-      .hero p{font-size:1rem}
-      .lang-switch{display:none}
-    }
-    :focus-visible{outline:none;box-shadow:var(--focus)}
+    body{margin:0;background:var(--bg);color:#0f172a;line-height:1.5}
+    header{display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--card);box-shadow:0 2px 6px rgba(0,0,0,0.06);position:sticky;top:0;z-index:10}
+    header h1{margin:0;font-size:20px}
+    header .lang-switch button{margin-left:8px;padding:6px 12px;border:none;border-radius:6px;background:var(--accent);color:white;cursor:pointer;font-weight:600}
+    main{max-width:900px;margin:20px auto;padding:10px}
+    .card{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:0 4px 12px rgba(12,14,20,0.06);margin-bottom:20px}
+    h2{margin-top:12px}
+    img{max-width:100%;border-radius:8px;margin:10px 0}
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(37,99,235,0.08);color:var(--accent);font-weight:600;font-size:13px;margin-right:8px;}
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
-    <div class="container nav-container" aria-hidden="false">
-      <div class="logo" aria-label="Green Network home">
-        <i class="fas fa-seedling" aria-hidden="true"></i>
-        <span id="brandText">Green Network</span>
-      </div>
-
-      <nav id="mainNav" role="navigation" aria-label="Main navigation">
-        <div style="display:flex;align-items:center;gap:8px">
-          <!-- Language switch -->
-          <div class="lang-switch" role="radiogroup" aria-label="Language switch">
-            <button class="lang-btn" id="langEn" data-lang="en" aria-pressed="false">EN</button>
-            <button class="lang-btn" id="langZh" data-lang="zh" aria-pressed="false">中文</button>
-          </div>
-
-          <!-- Mobile menu button -->
-          <button class="mobile-menu" id="menuBtn" aria-expanded="false" aria-controls="navList" aria-label="Toggle navigation">
-            <i class="fas fa-bars" id="menuIcon" aria-hidden="true"></i>
-          </button>
-        </div>
-
-        <ul id="navList">
-          <li><a data-i18n="nav.home" href="#home">Home</a></li>
-          <li><a data-i18n="nav.about" href="#about">About</a></li>
-          <li><a data-i18n="nav.initiatives" href="#initiatives">Initiatives</a></li>
-          <li><a data-i18n="nav.getInvolved" href="#get-involved">Get Involved</a></li>
-          <li><a data-i18n="nav.contact" href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+    <h1 data-lang="zh">老年痴呆症科普</h1>
+    <h1 data-lang="en" style="display:none">Dementia & Alzheimer’s</h1>
+    <div class="lang-switch">
+      <button onclick="switchLang('zh')">中文</button>
+      <button onclick="switchLang('en')">English</button>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero" id="home" aria-labelledby="heroHeading">
-    <!-- background uses Earth image (public domain Apollo 17 photo) -->
-    <div class="hero-lazy" id="heroBg" role="img" aria-label="Volunteers planting trees at sunrise"></div>
+  <main>
+    <section class="card">
+      <h2 data-lang="zh">什么是老年痴呆症？</h2>
+      <h2 data-lang="en" style="display:none">What is Dementia?</h2>
+      <p data-lang="zh" class="muted">
+        老年痴呆症（阿尔茨海默病）是影响记忆、思维和日常功能的一类疾病，常见于老年人。
+      </p>
+      <p data-lang="en" class="muted" style="display:none">
+        Dementia, including Alzheimer’s disease, affects memory, thinking, and daily functioning, commonly in older adults.
+      </p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Alzheimer_Brain.png" alt="脑部示意图">
+    </section>
 
-    <div class="container hero-content">
-      <h1 id="heroHeading" data-i18n="hero.title">Protect Our Planet, Preserve Our Future</h1>
-      <p id="heroSub" data-i18n="hero.subtitle">Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-      <a id="heroCTA" data-i18n="hero.cta" class="btn" href="#get-involved">Join Our Network</a>
-    </div>
-  </section>
+    <section class="card">
+      <h2 data-lang="zh">症状</h2>
+      <h2 data-lang="en" style="display:none">Symptoms</h2>
+      <ul data-lang="zh">
+        <li>记忆力下降</li>
+        <li>语言表达困难</li>
+        <li>判断力下降</li>
+        <li>情绪和行为改变</li>
+      </ul>
+      <ul data-lang="en" style="display:none">
+        <li>Memory loss</li>
+        <li>Difficulty in communication</li>
+        <li>Reduced judgment</li>
+        <li>Mood and behavior changes</li>
+      </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Alzheimer_symptoms_diagram.png" alt="症状示意图">
+    </section>
 
-  <!-- About -->
-  <section id="about" aria-labelledby="aboutHeading">
-    <div class="container">
-      <div class="section-title">
-        <h2 id="aboutHeading" data-i18n="about.title">About Green Network</h2>
-        <p id="aboutLead" data-i18n="about.lead">We are a global community dedicated to environmental protection and sustainable development.</p>
-      </div>
+    <section class="card">
+      <h2 data-lang="zh">预防与照护</h2>
+      <h2 data-lang="en" style="display:none">Prevention & Care</h2>
+      <ul data-lang="zh">
+        <li>保持心脑血管健康</li>
+        <li>规律运动</li>
+        <li>丰富社交与脑力活动</li>
+        <li>均衡饮食</li>
+        <li>充足睡眠</li>
+      </ul>
+      <ul data-lang="en" style="display:none">
+        <li>Maintain cardiovascular health</li>
+        <li>Regular exercise</li>
+        <li>Social and cognitive activities</li>
+        <li>Balanced diet</li>
+        <li>Adequate sleep</li>
+      </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Healthy_lifestyle.png" alt="健康生活方式">
+    </section>
+  </main>
 
-      <div class="about-content">
-        <div class="about-img">
-          <img
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=800&q=60&fm=webp"
-            srcset="
-              https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=480&q=60&fm=webp 480w,
-              https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=800&q=60&fm=webp 800w,
-              https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w
-            "
-            sizes="(max-width:600px) 480px, (max-width:1000px) 800px, 1200px"
-            alt="Team planting trees"
-            id="aboutImg"
-          />
-        </div>
-
-        <div class="about-text">
-          <h3 data-i18n="about.missionTitle">Our Mission</h3>
-          <p data-i18n="about.p1">Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-          <p data-i18n="about.p2">Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-          <p data-i18n="about.p3">Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-          <a href="#" class="btn" data-i18n="about.learnMore">Learn More</a>
-        </div>
-      </div>
-
-      <div class="stats" role="list" aria-label="Organization statistics">
-        <div class="stat-item" role="listitem">
-          <i class="fas fa-tree" aria-hidden="true"></i>
-          <h3 class="counter" data-target="2500000" data-key="trees" aria-live="polite">0</h3>
-          <p data-i18n="stats.trees">Trees Planted</p>
-        </div>
-
-        <div class="stat-item" role="listitem">
-          <i class="fas fa-users" aria-hidden="true"></i>
-          <h3 class="counter" data-target="50000" data-key="members" aria-live="polite">0</h3>
-          <p data-i18n="stats.members">Active Members</p>
-        </div>
-
-        <div class="stat-item" role="listitem">
-          <i class="fas fa-globe-americas" aria-hidden="true"></i>
-          <h3 class="counter" data-target="120" data-key="countries" aria-live="polite">0</h3>
-          <p data-i18n="stats.countries">Countries Reached</p>
-        </div>
-
-        <div class="stat-item" role="listitem">
-          <i class="fas fa-recycle" aria-hidden="true"></i>
-          <h3 class="counter" data-target="1500" data-key="cleanups" aria-live="polite">0</h3>
-          <p data-i18n="stats.cleanups">Cleanup Projects</p>
-        </div>
-      </div>
-
-      <div class="stats-controls" aria-hidden="false">
-        <div class="toggle" style="gap:8px;align-items:center">
-          <label for="shortFormatToggle" id="shortFormatLabel" data-i18n="controls.shortFormat">Short format (2.5M)</label>
-          <input type="checkbox" id="shortFormatToggle" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Initiatives -->
-  <section class="initiatives" id="initiatives" aria-labelledby="initiativesHeading">
-    <div class="container">
-      <div class="section-title">
-        <h2 id="initiativesHeading" data-i18n="initiatives.title">Our Initiatives</h2>
-        <p id="initiativesLead" data-i18n="initiatives.lead">Discover the key programs and projects we're implementing to protect our planet.</p>
-      </div>
-
-      <div class="initiatives-grid">
-        <article class="initiative-card" aria-labelledby="init1">
-          <div class="initiative-img">
-            <img loading="lazy"
-                 src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg?auto=format&fit=crop&w=800&q=60&fm=webp"
-                 srcset="
-                   https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg?auto=format&fit=crop&w=480&q=60&fm=webp 480w,
-                   https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg?auto=format&fit=crop&w=800&q=60&fm=webp 800w,
-                   https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w
-                 "
-                 sizes="(max-width:600px) 480px, (max-width:1000px) 800px, 1200px"
-                 alt="Reforestation project" />
-          </div>
-          <div class="initiative-content">
-            <h3 id="init1Title" data-i18n="init.reforest.title">Global Reforestation</h3>
-            <p data-i18n="init.reforest.desc">Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-            <a href="#" class="btn" data-i18n="init.learnMore">Learn More</a>
-          </div>
-        </article>
-
-        <article class="initiative-card" aria-labelledby="init2">
-          <div class="initiative-img">
-            <img loading="lazy"
-                 src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?auto=format&fit=crop&w=800&q=60&fm=webp"
-                 srcset="
-                   https://images.unsplash.com/photo-1621451537084-482c73073a0f?auto=format&fit=crop&w=480&q=60&fm=webp 480w,
-                   https://images.unsplash.com/photo-1621451537084-482c73073a0f?auto=format&fit=crop&w=800&q=60&fm=webp 800w,
-                   https://images.unsplash.com/photo-1621451537084-482c73073a0f?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w
-                 "
-                 sizes="(max-width:600px) 480px, (max-width:1000px) 800px, 1200px"
-                 alt="Ocean conservation" />
-          </div>
-          <div class="initiative-content">
-            <h3 data-i18n="init.ocean.title">Ocean Conservation</h3>
-            <p data-i18n="init.ocean.desc">Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-            <a href="#" class="btn" data-i18n="init.learnMore">Learn More</a>
-          </div>
-        </article>
-
-        <article class="initiative-card" aria-labelledby="init3">
-          <div class="initiative-img">
-            <img loading="lazy"
-                 src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=60&fm=webp"
-                 srcset="
-                   https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=480&q=60&fm=webp 480w,
-                   https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=60&fm=webp 800w,
-                   https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w
-                 "
-                 sizes="(max-width:600px) 480px, (max-width:1000px) 800px, 1200px"
-                 alt="Renewable energy" />
-          </div>
-          <div class="initiative-content">
-            <h3 data-i18n="init.renew.title">Renewable Energy</h3>
-            <p data-i18n="init.renew.desc">Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-            <a href="#" class="btn" data-i18n="init.learnMore">Learn More</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta" id="get-involved" aria-labelledby="ctaHeading">
-    <div class="container">
-      <h2 id="ctaHeading" data-i18n="cta.title">Join Our Global Movement</h2>
-      <p id="ctaLead" data-i18n="cta.lead">Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-      <a href="#" class="btn" id="becomeMember" data-i18n="cta.cta">Become a Member</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact" aria-labelledby="footerHeading">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column" aria-labelledby="f1">
-          <h3 id="f1" data-i18n="footer.brand">Green Network</h3>
-          <p data-i18n="footer.desc">We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-          <div class="social-links" aria-label="Social links">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-          </div>
-        </div>
-
-        <div class="footer-column" aria-labelledby="f2">
-          <h3 id="f2" data-i18n="footer.quickLinks">Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="#home" data-i18n="nav.home">Home</a></li>
-            <li><a href="#about" data-i18n="nav.about">About Us</a></li>
-            <li><a href="#initiatives" data-i18n="nav.initiatives">Initiatives</a></li>
-            <li><a href="#get-involved" data-i18n="nav.getInvolved">Get Involved</a></li>
-            <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column" aria-labelledby="f3">
-          <h3 id="f3" data-i18n="footer.programs">Our Programs</h3>
-          <ul class="footer-links">
-            <li><a href="#" data-i18n="programs.reforest">Reforestation</a></li>
-            <li><a href="#" data-i18n="programs.ocean">Ocean Cleanup</a></li>
-            <li><a href="#" data-i18n="programs.wildlife">Wildlife Protection</a></li>
-            <li><a href="#" data-i18n="programs.education">Climate Education</a></li>
-            <li><a href="#" data-i18n="programs.agriculture">Sustainable Agriculture</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column" aria-labelledby="f4">
-          <h3 id="f4" data-i18n="footer.contact">Contact Us</h3>
-          <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <span data-i18n="contact.address">Copper Creek Drive, New York</span></p>
-          <p><i class="fas fa-phone" aria-hidden="true"></i> <span data-i18n="contact.phone">+1 (312) 171-0771</span></p>
-          <p><i class="fas fa-envelope" aria-hidden="true"></i> <span data-i18n="contact.email">support@greennetwork.org</span></p>
-        </div>
-      </div>
-
-      <div class="copyright" id="copyrightText">
-        <p>&copy; <span id="year">2025</span> <span data-i18n="footer.brand">Green Network</span>. <span data-i18n="footer.rights">All rights reserved.</span></p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
   <script>
-  (function(){
-    // ---------- Translations ----------
-    const translations = {
-      en: {
-        brand: "Green Network",
-        nav: { home: "Home", about: "About", initiatives: "Initiatives", getInvolved: "Get Involved", contact: "Contact" },
-        hero: { title: "Protect Our Planet, Preserve Our Future", subtitle: "Join the global movement to create a sustainable world through conservation, education, and community action.", cta: "Join Our Network" },
-        about: { title: "About Green Network", lead: "We are a global community dedicated to environmental protection and sustainable development.", missionTitle: "Our Mission", p1: "Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.", p2: "Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.", p3: "Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.", learnMore: "Learn More" },
-        stats: { trees: "Trees Planted", members: "Active Members", countries: "Countries Reached", cleanups: "Cleanup Projects" },
-        controls: { shortFormat: "Short format (2.5M)" },
-        initiatives: { title: "Our Initiatives", lead: "Discover the key programs and projects we're implementing to protect our planet." },
-        init: { reforest: { title: "Global Reforestation", desc: "Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity." }, ocean: { title: "Ocean Conservation", desc: "Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices." }, renew: { title: "Renewable Energy", desc: "Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels." }, learnMore: "Learn More" },
-        cta: { title: "Join Our Global Movement", lead: "Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.", cta: "Become a Member" },
-        footer: { brand: "Green Network", desc: "We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.", quickLinks: "Quick Links", programs: "Our Programs", contact: "Contact Us", rights: "All rights reserved." },
-        programs: { reforest: "Reforestation", ocean: "Ocean Cleanup", wildlife: "Wildlife Protection", education: "Climate Education", agriculture: "Sustainable Agriculture" },
-        contact: { address: "Copper Creek Drive, New York", phone: "+1 (312) 171-0771", email: "support@greennetwork.org" },
-        metaDescription: "Green Network — a global community dedicated to environmental protection, reforestation, ocean conservation and renewable energy advocacy. Join us to make a real difference."
-      },
-      zh: {
-        brand: "绿色网络",
-        nav: { home: "首页", about: "关于我们", initiatives: "项目", getInvolved: "参与方式", contact: "联系我们" },
-        hero: { title: "守护地球，守护未来", subtitle: "加入全球行动，通过保护、教育与社区行动共创可持续世界。", cta: "加入我们" },
-        about: { title: "关于绿色网络", lead: "我们是致力于环境保护与可持续发展的全球社区。", missionTitle: "我们的使命", p1: "绿色网络致力于通过保护自然生态、推动可再生能源和赋能社区来创造可持续的未来。", p2: "成立于2010年，我们从一个小型草根组织发展为跨120个国家、拥有超过50,000名成员的国际网络。", p3: "我们将科学研究、社区参与与政策倡导相结合，来应对当今最紧迫的环境挑战。", learnMore: "了解更多" },
-        stats: { trees: "种植树木", members: "活跃成员", countries: "覆盖国家", cleanups: "清洁项目" },
-        controls: { shortFormat: "短格式显示（例如 2.5M）" },
-        initiatives: { title: "我们的项目", lead: "了解我们为保护地球开展的核心项目与计划。" },
-        init: { reforest: { title: "全球造林", desc: "在全球范围种植数百万棵树，恢复生态系统、抵抗气候变化并保护生物多样性。" }, ocean: { title: "海洋保护", desc: "保护海洋生态，减少塑料污染，推广可持续渔业。" }, renew: { title: "可再生能源", desc: "推广太阳能、风能等清洁能源，减少对化石燃料的依赖。" }, learnMore: "了解更多" },
-        cta: { title: "加入我们的全球行动", lead: "携手为子孙后代创造可持续的未来。每一个行动都很重要。", cta: "成为会员" },
-        footer: { brand: "绿色网络", desc: "我们通过协作行动、教育与可持续解决方案来保护我们的地球。", quickLinks: "快速链接", programs: "我们的计划", contact: "联系我们", rights: "保留所有权利。" },
-        programs: { reforest: "造林", ocean: "海洋清洁", wildlife: "野生动物保护", education: "气候教育", agriculture: "可持续农业" },
-        contact: { address: "铜溪大道，纽约", phone: "+1 (312) 171-0771", email: "support@greennetwork.org" },
-        metaDescription: "绿色网络 — 一个致力于环境保护、造林、海洋保护与可再生能源倡导的全球社区。加入我们，共同行动。"
-      }
-    };
-
-    // ---------- Helpers ----------
-    const $ = sel => document.querySelector(sel);
-    const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-    function applyTranslations(lang){
-      const mapNodes = $$('[data-i18n]');
-      mapNodes.forEach(node=>{
-        const key = node.getAttribute('data-i18n');
-        const parts = key.split('.');
-        let val = translations[lang];
-        for(const p of parts){
-          if(val && (p in val)) val = val[p];
-          else { val = null; break; }
-        }
-        if(val !== null && val !== undefined){
-          if(node.tagName.toLowerCase() === 'input' || node.tagName.toLowerCase() === 'textarea'){
-            node.placeholder = val;
-          } else {
-            node.textContent = val;
-          }
-        }
-      });
-
-      const brand = translations[lang].brand || '';
-      const titleText = (lang === 'zh') ? `${brand} - 守护地球` : `${brand} - Protect Earth`;
-      document.title = titleText;
-      $('#metaDescription').setAttribute('content', translations[lang].metaDescription || '');
-      $('#ogTitle').setAttribute('content', titleText);
-      $('#ogDesc').setAttribute('content', translations[lang].hero.subtitle || '');
-
-      // update heroBg aria label for Earth context
-      $('#heroBg').setAttribute('aria-label', lang === 'zh' ? '从太空看地球' : 'Earth seen from space');
-      $('#aboutImg').setAttribute('alt', lang === 'zh' ? '团队植树' : 'Team planting trees');
-
-      $$('#copyrightText [data-i18n="footer.brand"]').forEach(n=>n.textContent = translations[lang].brand);
-    }
-
-    // ---------- Language switch logic ----------
-    const langEnBtn = $('#langEn');
-    const langZhBtn = $('#langZh');
-    const savedLang = localStorage.getItem('gn_lang') || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
-    let currentLang = savedLang;
-
-    function setLanguage(lang){
-      currentLang = lang;
-      localStorage.setItem('gn_lang', lang);
-      applyTranslations(lang);
-      [langEnBtn, langZhBtn].forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-      if(lang === 'en'){ langEnBtn.classList.add('active'); langEnBtn.setAttribute('aria-pressed','true'); }
-      else { langZhBtn.classList.add('active'); langZhBtn.setAttribute('aria-pressed','true'); }
-    }
-    langEnBtn.addEventListener('click', ()=> setLanguage('en'));
-    langZhBtn.addEventListener('click', ()=> setLanguage('zh'));
-
-    // ---------- Mobile menu logic ----------
-    const menuBtn = $('#menuBtn');
-    const navList = $('#navList');
-    const menuIcon = $('#menuIcon');
-    let menuOpen = false;
-    function openMenu(){ navList.classList.add('active'); menuBtn.setAttribute('aria-expanded','true'); menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-xmark'); document.body.style.overflow = 'hidden'; menuOpen = true; }
-    function closeMenu(){ navList.classList.remove('active'); menuBtn.setAttribute('aria-expanded','false'); menuIcon.classList.remove('fa-xmark'); menuIcon.classList.add('fa-bars'); document.body.style.overflow = ''; menuOpen = false; }
-    menuBtn.addEventListener('click', e => { e.stopPropagation(); menuOpen ? closeMenu() : openMenu(); });
-    document.addEventListener('click', e => { if(menuOpen && !navList.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) closeMenu(); });
-    document.addEventListener('keydown', e => { if(e.key === 'Escape' && menuOpen){ closeMenu(); menuBtn.focus(); } });
-    navList.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', ()=>{ if(menuOpen) closeMenu(); }));
-
-    // ---------- Hero background: Earth image (public domain Apollo 17) ----------
-    const heroBg = $('#heroBg');
-    // Use Wikimedia Commons Apollo 17 Earth image (public domain)
-    function earthUrlFor(width){
-      // Wikimedia direct image (single file) — will be scaled by the browser
-      // Using high-res original; browser will request as needed.
-      return 'https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg';
-    }
-    function loadHeroBg(){
-      const url = earthUrlFor();
-      const img = new Image();
-      img.src = url;
-      img.onload = () => {
-        heroBg.style.backgroundImage = `url('${url}')`;
-        heroBg.classList.add('loaded');
-      };
-    }
-    loadHeroBg();
-
-    // ---------- Counters with short-format toggle ----------
-    const counters = $$('.counter');
-    const shortToggle = $('#shortFormatToggle');
-    const savedShort = localStorage.getItem('gn_short') === '1';
-    shortToggle.checked = savedShort;
-
-    function formatShort(n){
-      if(n >= 1e9) return (n/1e9).toFixed(1).replace(/\.0$/,'') + 'B';
-      if(n >= 1e6) return (n/1e6).toFixed(1).replace(/\.0$/,'') + 'M';
-      if(n >= 1e3) return (n/1e3).toFixed(1).replace(/\.0$/,'') + 'k';
-      return String(n);
-    }
-    function formatNumber(n, useShort){
-      if(useShort) return formatShort(n);
-      return n.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US');
-    }
-    function animateCount(el, start, end, duration, useShort){
-      let startTime = null;
-      const step = (timestamp) => {
-        if(!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / duration, 1);
-        const value = Math.floor(progress * (end - start) + start);
-        el.textContent = formatNumber(value, useShort);
-        if(progress < 1){
-          requestAnimationFrame(step);
+    function switchLang(lang){
+      document.querySelectorAll('[data-lang]').forEach(el=>{
+        if(el.getAttribute('data-lang')===lang){
+          el.style.display='';
         } else {
-          el.textContent = formatNumber(end, useShort);
-        }
-      };
-      requestAnimationFrame(step);
-    }
-    let countersObserver;
-    function startCountersObserver(useShort){
-      if('IntersectionObserver' in window && counters.length){
-        countersObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if(entry.isIntersecting){
-              const el = entry.target;
-              const target = parseInt(el.getAttribute('data-target'), 10) || 0;
-              animateCount(el, 0, target, 1200, useShort);
-              observer.unobserve(el);
-            }
-          });
-        }, { threshold: 0.35 });
-        counters.forEach(c => { c.textContent = formatNumber(0, useShort); countersObserver.observe(c); });
-      } else {
-        counters.forEach(c => { const t = parseInt(c.getAttribute('data-target'),10)||0; c.textContent = formatNumber(t, useShort); });
-      }
-    }
-    function initShortToggle(){
-      const useShort = shortToggle.checked;
-      localStorage.setItem('gn_short', useShort ? '1' : '0');
-      if(countersObserver) { countersObserver.disconnect(); countersObserver = null; }
-      startCountersObserver(useShort);
-    }
-    shortToggle.addEventListener('change', initShortToggle);
-
-    // ---------- initialize on DOM ready ----------
-    document.addEventListener('DOMContentLoaded', () => {
-      setLanguage(currentLang);
-      initShortToggle();
-      (function(){
-        function handleFirstTab(e){ if(e.key === 'Tab'){ document.body.classList.add('user-is-tabbing'); window.removeEventListener('keydown', handleFirstTab); } }
-        window.addEventListener('keydown', handleFirstTab);
-      })();
-    });
-
-    // ---------- Smooth scrolling offset fallback ----------
-    $$('a[href^="#"]').forEach(anchor=>{
-      anchor.addEventListener('click', function(e){
-        const href = this.getAttribute('href');
-        if(!href || href === '#') return;
-        const target = document.querySelector(href);
-        if(target){
-          e.preventDefault();
-          const headerOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 76;
-          const rect = target.getBoundingClientRect();
-          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          const targetPos = rect.top + scrollTop - headerOffset;
-          window.scrollTo({ top: targetPos, behavior: 'smooth' });
+          el.style.display='none';
         }
       });
-    });
-
-    // ---------- initial year ----------
-    $('#year').textContent = new Date().getFullYear();
-
-    // expose setLanguage (defined earlier) — ensure available by hoisting
-    function setLanguage(lang){
-      currentLang = lang;
-      localStorage.setItem('gn_lang', lang);
-      applyTranslations(lang);
-      [langEnBtn, langZhBtn].forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-      if(lang === 'en'){ langEnBtn.classList.add('active'); langEnBtn.setAttribute('aria-pressed','true'); }
-      else { langZhBtn.classList.add('active'); langZhBtn.setAttribute('aria-pressed','true'); }
     }
-  })();
   </script>
 </body>
 </html>
