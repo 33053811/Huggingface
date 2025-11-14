@@ -9,7 +9,8 @@
   <meta property="og:title" content="Green Network - Protect Earth" id="ogTitle"/>
   <meta property="og:description" content="Join the global movement to create a sustainable world through conservation, education, and community action." id="ogDesc"/>
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80&fm=webp" />
+  <!-- OG image updated to Earth image -->
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Green Network - Protect Earth" />
   <meta name="twitter:description" content="Join the global movement to create a sustainable world through conservation, education, and community action." />
@@ -66,14 +67,13 @@
     .mobile-menu{display:none;background:transparent;border:0;color:var(--white);font-size:1.2rem;padding:6px;border-radius:8px;cursor:pointer}
     .mobile-menu:focus{box-shadow:var(--focus);outline:none}
 
-    /* language switch */
     .lang-switch{display:flex;gap:6px;align-items:center}
     .lang-btn{background:transparent;border:1px solid rgba(255,255,255,0.18);color:var(--white);padding:0.35rem 0.6rem;border-radius:6px;cursor:pointer;font-weight:600}
     .lang-btn.active{background:rgba(255,255,255,0.12)}
     .lang-btn:focus{box-shadow:var(--focus);outline:none}
 
     .hero{min-height:76vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);position:relative;overflow:hidden}
-    .hero-lazy{background-size:cover;background-position:center;width:100%;height:100%;position:absolute;inset:0;z-index:0;filter:brightness(0.6);transition:opacity 600ms ease;opacity:0}
+    .hero-lazy{background-size:cover;background-position:center;width:100%;height:100%;position:absolute;inset:0;z-index:0;filter:brightness(0.55) contrast(1.05);transition:opacity 600ms ease;opacity:0}
     .hero-lazy.loaded{opacity:1}
     .hero .hero-content{position:relative;z-index:2;max-width:880px;padding:3rem 1rem}
     .hero h1{font-size:2.6rem;margin-bottom:0.8rem;text-shadow:2px 2px 6px rgba(0,0,0,0.45)}
@@ -142,7 +142,7 @@
       .stats{grid-template-columns:1fr}
       .hero h1{font-size:1.9rem}
       .hero p{font-size:1rem}
-      .lang-switch{display:none} /* hide language switch in header on very small; can be added to footer if needed */
+      .lang-switch{display:none}
     }
     :focus-visible{outline:none;box-shadow:var(--focus)}
   </style>
@@ -183,6 +183,7 @@
 
   <!-- Hero -->
   <section class="hero" id="home" aria-labelledby="heroHeading">
+    <!-- background uses Earth image (public domain Apollo 17 photo) -->
     <div class="hero-lazy" id="heroBg" role="img" aria-label="Volunteers planting trees at sunrise"></div>
 
     <div class="container hero-content">
@@ -202,7 +203,6 @@
 
       <div class="about-content">
         <div class="about-img">
-          <!-- responsive image with webp via Unsplash parameters -->
           <img
             loading="lazy"
             src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=800&q=60&fm=webp"
@@ -435,7 +435,6 @@
       const mapNodes = $$('[data-i18n]');
       mapNodes.forEach(node=>{
         const key = node.getAttribute('data-i18n');
-        // nested keys like "nav.home" -> translations[lang].nav.home
         const parts = key.split('.');
         let val = translations[lang];
         for(const p of parts){
@@ -451,7 +450,6 @@
         }
       });
 
-      // update document title & meta description & OG
       const brand = translations[lang].brand || '';
       const titleText = (lang === 'zh') ? `${brand} - 守护地球` : `${brand} - Protect Earth`;
       document.title = titleText;
@@ -459,11 +457,10 @@
       $('#ogTitle').setAttribute('content', titleText);
       $('#ogDesc').setAttribute('content', translations[lang].hero.subtitle || '');
 
-      // update language-dependent alt texts and ARIA labels where needed
-      $('#heroBg').setAttribute('aria-label', lang === 'zh' ? '志愿者在日出时种树' : 'Volunteers planting trees at sunrise');
+      // update heroBg aria label for Earth context
+      $('#heroBg').setAttribute('aria-label', lang === 'zh' ? '从太空看地球' : 'Earth seen from space');
       $('#aboutImg').setAttribute('alt', lang === 'zh' ? '团队植树' : 'Team planting trees');
 
-      // update footer year and brand occurrences
       $$('#copyrightText [data-i18n="footer.brand"]').forEach(n=>n.textContent = translations[lang].brand);
     }
 
@@ -477,12 +474,10 @@
       currentLang = lang;
       localStorage.setItem('gn_lang', lang);
       applyTranslations(lang);
-      // update active class and aria-pressed
       [langEnBtn, langZhBtn].forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
       if(lang === 'en'){ langEnBtn.classList.add('active'); langEnBtn.setAttribute('aria-pressed','true'); }
       else { langZhBtn.classList.add('active'); langZhBtn.setAttribute('aria-pressed','true'); }
     }
-
     langEnBtn.addEventListener('click', ()=> setLanguage('en'));
     langZhBtn.addEventListener('click', ()=> setLanguage('zh'));
 
@@ -491,32 +486,23 @@
     const navList = $('#navList');
     const menuIcon = $('#menuIcon');
     let menuOpen = false;
-
     function openMenu(){ navList.classList.add('active'); menuBtn.setAttribute('aria-expanded','true'); menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-xmark'); document.body.style.overflow = 'hidden'; menuOpen = true; }
     function closeMenu(){ navList.classList.remove('active'); menuBtn.setAttribute('aria-expanded','false'); menuIcon.classList.remove('fa-xmark'); menuIcon.classList.add('fa-bars'); document.body.style.overflow = ''; menuOpen = false; }
-
     menuBtn.addEventListener('click', e => { e.stopPropagation(); menuOpen ? closeMenu() : openMenu(); });
     document.addEventListener('click', e => { if(menuOpen && !navList.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) closeMenu(); });
     document.addEventListener('keydown', e => { if(e.key === 'Escape' && menuOpen){ closeMenu(); menuBtn.focus(); } });
     navList.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', ()=>{ if(menuOpen) closeMenu(); }));
 
-    // ---------- Hero lazy background with responsive selection ----------
+    // ---------- Hero background: Earth image (public domain Apollo 17) ----------
     const heroBg = $('#heroBg');
-    // choose candidate widths (unsplash query uses w param)
-    function heroUrlFor(width){
-      // using Unsplash sample image - tuned widths
-      return `https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=${width}&q=70&fm=webp`;
+    // Use Wikimedia Commons Apollo 17 Earth image (public domain)
+    function earthUrlFor(width){
+      // Wikimedia direct image (single file) — will be scaled by the browser
+      // Using high-res original; browser will request as needed.
+      return 'https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg';
     }
     function loadHeroBg(){
-      const w = Math.max(window.innerWidth, 360);
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      // choose target width scaled by dpr
-      let chosen = 1200;
-      if(w * dpr <= 480) chosen = 480;
-      else if(w * dpr <= 800) chosen = 800;
-      else if(w * dpr <= 1200) chosen = 1200;
-      else chosen = 2000;
-      const url = heroUrlFor(chosen);
+      const url = earthUrlFor();
       const img = new Image();
       img.src = url;
       img.onload = () => {
@@ -524,10 +510,7 @@
         heroBg.classList.add('loaded');
       };
     }
-    // load now and also on resize (debounced)
     loadHeroBg();
-    let rtid;
-    window.addEventListener('resize', ()=>{ clearTimeout(rtid); rtid = setTimeout(loadHeroBg, 250); });
 
     // ---------- Counters with short-format toggle ----------
     const counters = $$('.counter');
@@ -545,8 +528,6 @@
       if(useShort) return formatShort(n);
       return n.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US');
     }
-
-    // animated counting function that respects short-format flag at each frame
     function animateCount(el, start, end, duration, useShort){
       let startTime = null;
       const step = (timestamp) => {
@@ -562,8 +543,6 @@
       };
       requestAnimationFrame(step);
     }
-
-    // Observe when counters come into view
     let countersObserver;
     function startCountersObserver(useShort){
       if('IntersectionObserver' in window && counters.length){
@@ -579,30 +558,21 @@
         }, { threshold: 0.35 });
         counters.forEach(c => { c.textContent = formatNumber(0, useShort); countersObserver.observe(c); });
       } else {
-        // fallback immediate
         counters.forEach(c => { const t = parseInt(c.getAttribute('data-target'),10)||0; c.textContent = formatNumber(t, useShort); });
       }
     }
-
-    // toggle handler
     function initShortToggle(){
       const useShort = shortToggle.checked;
       localStorage.setItem('gn_short', useShort ? '1' : '0');
-      // If there was a previous observer, disconnect and restart so values refresh with new format
       if(countersObserver) { countersObserver.disconnect(); countersObserver = null; }
-      // initialize counters to 0 with chosen format and observe
       startCountersObserver(useShort);
     }
-
     shortToggle.addEventListener('change', initShortToggle);
 
     // ---------- initialize on DOM ready ----------
     document.addEventListener('DOMContentLoaded', () => {
-      // language
       setLanguage(currentLang);
-      // counters
       initShortToggle();
-      // wire up keyboard focus detection class for better focus styling if desired
       (function(){
         function handleFirstTab(e){ if(e.key === 'Tab'){ document.body.classList.add('user-is-tabbing'); window.removeEventListener('keydown', handleFirstTab); } }
         window.addEventListener('keydown', handleFirstTab);
@@ -626,9 +596,18 @@
       });
     });
 
-    // ---------- initial year -->
+    // ---------- initial year ----------
     $('#year').textContent = new Date().getFullYear();
 
+    // expose setLanguage (defined earlier) — ensure available by hoisting
+    function setLanguage(lang){
+      currentLang = lang;
+      localStorage.setItem('gn_lang', lang);
+      applyTranslations(lang);
+      [langEnBtn, langZhBtn].forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+      if(lang === 'en'){ langEnBtn.classList.add('active'); langEnBtn.setAttribute('aria-pressed','true'); }
+      else { langZhBtn.classList.add('active'); langZhBtn.setAttribute('aria-pressed','true'); }
+    }
   })();
   </script>
 </body>
